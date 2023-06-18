@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class playerTurnV2 : MonoBehaviour
+public class PlayerTurnV2 : MonoBehaviour
 {
     public GameObject[] players; // Array of player game objects
     private int currentPlayerIndex; // Index of the current player
