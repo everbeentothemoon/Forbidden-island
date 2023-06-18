@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class deckRandomisedPlacement : MonoBehaviour
 {
-    public GameObject[] objectsToPlace; // Array of game objects to be placed
+    public GameObject[] islandCards; // Array of game objects to be placed
+    public GameObject[] sunkenCards;
     public Transform[] placementTransforms; // Array of transforms where objects can be placed
+    public List<GameObject> floodDeck;
+    public GameObject floodDeckdisplay;
 
-    private void Start()
+    public void Start()
     {
+        
         PlaceObjectsRandomly();
     }
 
     private void PlaceObjectsRandomly()
     {
         // Check if the number of objects and placement transforms match
-        if (objectsToPlace.Length != placementTransforms.Length)
+        if (islandCards.Length != placementTransforms.Length)
         {
             Debug.LogError("Number of objects and placement transforms do not match.");
             return;
@@ -25,9 +29,9 @@ public class deckRandomisedPlacement : MonoBehaviour
         ShuffleTransformsArray();
 
         // Place each object on the randomized placement transforms
-        for (int i = 0; i < objectsToPlace.Length; i++)
+        for (int i = 0; i < islandCards.Length; i++)
         {
-            GameObject objectToPlace = objectsToPlace[i];
+            GameObject objectToPlace = islandCards[i];
             Transform placementTransform = placementTransforms[i];
 
             Instantiate(objectToPlace, placementTransform.position, placementTransform.rotation);
@@ -43,6 +47,24 @@ public class deckRandomisedPlacement : MonoBehaviour
             Transform temp = placementTransforms[i];
             placementTransforms[i] = placementTransforms[randomIndex];
             placementTransforms[randomIndex] = temp;
+        }
+    }
+
+    public void CheckWhichCardsToSink(int index)
+    {
+        if (floodDeckdisplay)
+        {
+            
+        }
+    }
+
+    public void FloodCardAllocation(int index)
+    {
+        // if (remainingActions >= 5)
+        if (sunkenCards[index] == islandCards[index])
+        {
+            islandCards[index].SetActive(false);
+            sunkenCards[index].transform.position = islandCards[index].transform.position;
         }
     }
 }
